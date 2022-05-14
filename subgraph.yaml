@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Yagmi
+    network: mumbai
+    source:
+      address: "0x0b46Cd567C2835449A2c59925e94433D811e74be"
+      abi: Yagmi
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - goalCreated
+        - powApproved
+        - powRejected
+        - powUpdated
+      abis:
+        - name: Yagmi
+          file: ./abis/Yagmi.json
+      eventHandlers:
+        - event: goalCreated(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlegoalCreated
+        - event: powApproved(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlepowApproved
+        - event: powRejected(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlepowRejected
+        - event: powUpdated(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlepowUpdated
+      file: ./src/mapping.ts
