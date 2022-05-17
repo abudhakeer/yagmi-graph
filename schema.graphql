@@ -1,6 +1,25 @@
-type ExampleEntity @entity {
+type _Schema_
+  @fulltext(
+    name: "messageSearch"
+    language: en
+    algorithm: rank
+    include: [
+      {
+        entity: "Goal"
+        fields: [{ name: "_setterAddress" }, { name: "_partnerAddress" }]
+      }
+    ]
+  )
+
+type Goal @entity {
   id: ID!
-  count: BigInt!
-  goalId: BigInt! # uint256
-  goalTitle: String! # string
+  _goalId: BigInt! # uint256
+  _goalTitle: String! # uint256
+  _goalDesc: String! # address
+  _setterAddress: String! # uint256
+  _partnerAddress: String! # uint256
+  _amount: BigInt! # uint256
+  _dueDate: BigInt! # uint256
+  _powUrl: String! # uint256
+  _powStatus: String! # uint256
 }

@@ -1,58 +1,121 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   Yagmi,
   goalCreated,
   powApproved,
   powRejected,
-  powUpdated
-} from "../generated/Yagmi/Yagmi"
-import { ExampleEntity } from "../generated/schema"
+  powUpdated,
+} from "../generated/Yagmi/Yagmi";
+import { Goal } from "../generated/schema";
 
-export function handlegoalCreated(event: goalCreated): void {
+export function handleGoalCreated(eventOne: goalCreated): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entityOne = Goal.load(
+    eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+  );
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
-  if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
-
-    // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+  if (!entityOne) {
+    entityOne = new Goal(
+      eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+    );
   }
 
-  // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  entityOne._goalId = eventOne.params.goalId;
+  entityOne._goalTitle = eventOne.params.goalTitle;
+  entityOne._goalDesc = eventOne.params.goalDesc;
+  entityOne._setterAddress = eventOne.params.setterAddr.toHexString();
+  entityOne._partnerAddress = eventOne.params.partnerAddr.toHexString();
+  entityOne._amount = eventOne.params.amount;
+  entityOne._dueDate = eventOne.params.dueDate;
+  entityOne._powUrl = eventOne.params.powUrl;
+  entityOne._powStatus = eventOne.params.powStatus;
 
-  // Entity fields can be set based on event parameters
-  entity.goalId = event.params.goalId
-  entity.goalTitle = event.params.goalTitle
-
-  // Entities can be written to the store with `.save()`
-  entity.save()
-
-  // Note: If a handler doesn't require existing field values, it is faster
-  // _not_ to load the entity from the store. Instead, create it fresh with
-  // `new Entity(...)`, set the fields that should be updated and save the
-  // entity back to the store. Fields that were not set or unset remain
-  // unchanged, allowing for partial updates to be applied.
-
-  // It is also possible to access smart contracts from mappings. For
-  // example, the contract that has emitted the event can be connected to
-  // with:
-  //
-  // let contract = Contract.bind(event.address)
-  //
-  // The following functions can then be called on this contract to access
-  // state variables and other data:
-  //
-  // - contract.getName(...)
-  // - contract.goalId(...)
+  entityOne.save();
 }
 
-export function handlepowApproved(event: powApproved): void {}
+export function handlePowUpdated(eventOne: powUpdated): void {
+  // Entities can be loaded from the store using a string ID; this ID
+  // needs to be unique across all entities of the same type
+  let entityOne = Goal.load(
+    eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+  );
 
-export function handlepowRejected(event: powRejected): void {}
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entityOne) {
+    entityOne = new Goal(
+      eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+    );
+  }
 
-export function handlepowUpdated(event: powUpdated): void {}
+  entityOne._goalId = eventOne.params.goalId;
+  entityOne._goalTitle = eventOne.params.goalTitle;
+  entityOne._goalDesc = eventOne.params.goalDesc;
+  entityOne._setterAddress = eventOne.params.setterAddr.toHexString();
+  entityOne._partnerAddress = eventOne.params.partnerAddr.toHexString();
+  entityOne._amount = eventOne.params.amount;
+  entityOne._dueDate = eventOne.params.dueDate;
+  entityOne._powUrl = eventOne.params.powUrl;
+  entityOne._powStatus = eventOne.params.powStatus;
+
+  entityOne.save();
+}
+
+export function handlePowApproved(eventOne: powApproved): void {
+  // Entities can be loaded from the store using a string ID; this ID
+  // needs to be unique across all entities of the same type
+  let entityOne = Goal.load(
+    eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+  );
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entityOne) {
+    entityOne = new Goal(
+      eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+    );
+  }
+
+  entityOne._goalId = eventOne.params.goalId;
+  entityOne._goalTitle = eventOne.params.goalTitle;
+  entityOne._goalDesc = eventOne.params.goalDesc;
+  entityOne._setterAddress = eventOne.params.setterAddr.toHexString();
+  entityOne._partnerAddress = eventOne.params.partnerAddr.toHexString();
+  entityOne._amount = eventOne.params.amount;
+  entityOne._dueDate = eventOne.params.dueDate;
+  entityOne._powUrl = eventOne.params.powUrl;
+  entityOne._powStatus = eventOne.params.powStatus;
+
+  entityOne.save();
+}
+
+export function handlePowRejected(eventOne: powRejected): void {
+  // Entities can be loaded from the store using a string ID; this ID
+  // needs to be unique across all entities of the same type
+  let entityOne = Goal.load(
+    eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+  );
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entityOne) {
+    entityOne = new Goal(
+      eventOne.transaction.hash.toHex() + "-" + eventOne.logIndex.toString()
+    );
+  }
+
+  entityOne._goalId = eventOne.params.goalId;
+  entityOne._goalTitle = eventOne.params.goalTitle;
+  entityOne._goalDesc = eventOne.params.goalDesc;
+  entityOne._setterAddress = eventOne.params.setterAddr.toHexString();
+  entityOne._partnerAddress = eventOne.params.partnerAddr.toHexString();
+  entityOne._amount = eventOne.params.amount;
+  entityOne._dueDate = eventOne.params.dueDate;
+  entityOne._powUrl = eventOne.params.powUrl;
+  entityOne._powStatus = eventOne.params.powStatus;
+
+  entityOne.save();
+}
