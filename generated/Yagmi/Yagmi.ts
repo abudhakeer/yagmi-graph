@@ -110,6 +110,106 @@ export class powApproved__Params {
   }
 }
 
+export class powDue extends ethereum.Event {
+  get params(): powDue__Params {
+    return new powDue__Params(this);
+  }
+}
+
+export class powDue__Params {
+  _event: powDue;
+
+  constructor(event: powDue) {
+    this._event = event;
+  }
+
+  get goalId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get goalTitle(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get goalDesc(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get setterAddr(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get partnerAddr(): Address {
+    return this._event.parameters[4].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get dueDate(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
+
+  get powUrl(): string {
+    return this._event.parameters[7].value.toString();
+  }
+
+  get powStatus(): string {
+    return this._event.parameters[8].value.toString();
+  }
+}
+
+export class powNotAttended extends ethereum.Event {
+  get params(): powNotAttended__Params {
+    return new powNotAttended__Params(this);
+  }
+}
+
+export class powNotAttended__Params {
+  _event: powNotAttended;
+
+  constructor(event: powNotAttended) {
+    this._event = event;
+  }
+
+  get goalId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get goalTitle(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get goalDesc(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get setterAddr(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get partnerAddr(): Address {
+    return this._event.parameters[4].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get dueDate(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
+
+  get powUrl(): string {
+    return this._event.parameters[7].value.toString();
+  }
+
+  get powStatus(): string {
+    return this._event.parameters[8].value.toString();
+  }
+}
+
 export class powRejected extends ethereum.Event {
   get params(): powRejected__Params {
     return new powRejected__Params(this);
@@ -215,19 +315,19 @@ export class Yagmi extends ethereum.SmartContract {
     return new Yagmi("Yagmi", address);
   }
 
-  getName(): string {
-    let result = super.call("getName", "getName():(string)", []);
+  getBalance(): BigInt {
+    let result = super.call("getBalance", "getBalance():(uint256)", []);
 
-    return result[0].toString();
+    return result[0].toBigInt();
   }
 
-  try_getName(): ethereum.CallResult<string> {
-    let result = super.tryCall("getName", "getName():(string)", []);
+  try_getBalance(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("getBalance", "getBalance():(uint256)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   goalId(): BigInt {
@@ -286,16 +386,70 @@ export class AddGoalCall__Inputs {
   get _dueDate(): BigInt {
     return this._call.inputValues[5].value.toBigInt();
   }
-
-  get _powUrl(): string {
-    return this._call.inputValues[6].value.toString();
-  }
 }
 
 export class AddGoalCall__Outputs {
   _call: AddGoalCall;
 
   constructor(call: AddGoalCall) {
+    this._call = call;
+  }
+}
+
+export class ClaimAmountCall extends ethereum.Call {
+  get inputs(): ClaimAmountCall__Inputs {
+    return new ClaimAmountCall__Inputs(this);
+  }
+
+  get outputs(): ClaimAmountCall__Outputs {
+    return new ClaimAmountCall__Outputs(this);
+  }
+}
+
+export class ClaimAmountCall__Inputs {
+  _call: ClaimAmountCall;
+
+  constructor(call: ClaimAmountCall) {
+    this._call = call;
+  }
+
+  get _goalId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _goalTitle(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _goalDesc(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get _setterAddr(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get _partnerAddr(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
+  }
+
+  get _dueDate(): BigInt {
+    return this._call.inputValues[6].value.toBigInt();
+  }
+
+  get _powUrl(): string {
+    return this._call.inputValues[7].value.toString();
+  }
+}
+
+export class ClaimAmountCall__Outputs {
+  _call: ClaimAmountCall;
+
+  constructor(call: ClaimAmountCall) {
     this._call = call;
   }
 }

@@ -1,13 +1,13 @@
 {
-  "name": "yagmi-graph",
+  "name": "yagmi",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ abudhakeer/yagmi-graph",
-    "create-local": "graph create --node http://localhost:8020/ abudhakeer/yagmi-graph",
-    "remove-local": "graph remove --node http://localhost:8020/ abudhakeer/yagmi-graph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 abudhakeer/yagmi-graph"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ abudhakeer/yagmi",
+    "create-local": "graph create --node http://localhost:8020/ abudhakeer/yagmi",
+    "remove-local": "graph remove --node http://localhost:8020/ abudhakeer/yagmi",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 abudhakeer/yagmi"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.29.2",

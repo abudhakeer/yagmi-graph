@@ -1,16 +1,3 @@
-type _Schema_
-  @fulltext(
-    name: "messageSearch"
-    language: en
-    algorithm: rank
-    include: [
-      {
-        entity: "Goal"
-        fields: [{ name: "_setterAddress" }, { name: "_partnerAddress" }]
-      }
-    ]
-  )
-
 type Goal @entity {
   id: ID!
   _goalId: BigInt! # uint256

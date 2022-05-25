@@ -6,7 +6,7 @@ dataSources:
     name: Yagmi
     network: mumbai
     source:
-      address: "0x0b46Cd567C2835449A2c59925e94433D811e74be"
+      address: "0xd96050d4db26423F342E43ea7f77D7D03F7a58Ea"
       abi: Yagmi
     mapping:
       kind: ethereum/events
@@ -17,16 +17,22 @@ dataSources:
         - powApproved
         - powRejected
         - powUpdated
+        - powNotAttended
+        - powDue
       abis:
         - name: Yagmi
           file: ./abis/Yagmi.json
       eventHandlers:
         - event: goalCreated(uint256,string,string,address,address,uint256,uint256,string,string)
-          handler: handlegoalCreated
+          handler: handleGoalCreated
         - event: powApproved(uint256,string,string,address,address,uint256,uint256,string,string)
-          handler: handlepowApproved
+          handler: handlePowApproved
         - event: powRejected(uint256,string,string,address,address,uint256,uint256,string,string)
-          handler: handlepowRejected
+          handler: handlePowRejected
         - event: powUpdated(uint256,string,string,address,address,uint256,uint256,string,string)
-          handler: handlepowUpdated
+          handler: handlePowUpdated
+        - event: powNotAttended(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlePowNotAttended
+        - event: powDue(uint256,string,string,address,address,uint256,uint256,string,string)
+          handler: handlePowDue
       file: ./src/mapping.ts
